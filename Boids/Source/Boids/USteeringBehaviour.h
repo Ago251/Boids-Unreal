@@ -10,7 +10,7 @@
  * 
  */
 UCLASS(Abstract, Blueprintable)
-class BOIDS_API UUSteeringBehaviour : public UObject
+class BOIDS_API USteeringBehaviour : public UObject
 {
 	GENERATED_BODY()
 	
