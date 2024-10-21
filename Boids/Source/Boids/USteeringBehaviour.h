@@ -14,4 +14,7 @@ class BOIDS_API UUSteeringBehaviour : public UObject
 {
 	GENERATED_BODY()
 	
+public:
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Steering")
+	FVector CalculateSteeringForce(const FVector& TargetLocation, class AActor* Owner);
 };
