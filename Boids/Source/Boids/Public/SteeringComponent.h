@@ -18,7 +18,7 @@ public:
 	USteeringComponent();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Steering")
-	TArray<USteeringBehaviour*> SteeringBehaviours;
+	TArray<TSubclassOf<USteeringBehaviour>> SteeringBehaviours;
 
 protected:
 	// Called when the game starts

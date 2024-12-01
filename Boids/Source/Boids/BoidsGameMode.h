@@ -11,8 +11,20 @@ class ABoidsGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Boids")
+	int32 NumBoids = 50;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Boids")
+	TSubclassOf<AActor> BoidClass;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Boids")
+	FBox SpawnArea;
+
 public:
 	ABoidsGameMode();
+
+	virtual void BeginPlay() override;
 };
 
 
