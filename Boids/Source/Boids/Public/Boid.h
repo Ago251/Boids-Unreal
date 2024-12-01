@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/StaticMeshComponent.h"
 #include "Boid.generated.h"
 
 UCLASS()
@@ -17,6 +18,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Boid")
 	class USphereComponent* NeighborDetectionSphere;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Boid")
+	class UStaticMeshComponent* StaticMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Boid")
 	float NeighborRange = 500.0f; 
