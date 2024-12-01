@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "USteeringBehaviour.generated.h"
+#include "SteeringBehaviour.generated.h"
 
 /**
  * 
@@ -16,5 +16,5 @@ class BOIDS_API USteeringBehaviour : public UObject
 	
 public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Steering")
-	FVector CalculateSteeringForce(const FVector& TargetLocation, class AActor* Owner);
+	FVector CalculateSteeringForce(class AActor* Owner);
 };

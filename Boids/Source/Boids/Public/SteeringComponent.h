@@ -3,9 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include <Boids/USteeringBehaviour.h>
 #include "Components/ActorComponent.h"
-#include "USteeringComponent.generated.h"
+#include "SteeringBehaviour.h"
+#include "SteeringComponent.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
