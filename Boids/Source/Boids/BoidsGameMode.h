@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/TriggerBox.h"
 #include "GameFramework/GameModeBase.h"
 #include "BoidsGameMode.generated.h"
 
@@ -17,9 +18,6 @@ protected:
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Boids")
 	TSubclassOf<AActor> BoidClass;
-	
-	UPROPERTY(EditDefaultsOnly, Category = "Boids")
-	FBox SpawnArea;
 
 public:
 	ABoidsGameMode();
