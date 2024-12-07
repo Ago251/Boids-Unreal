@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "SteeringComponent.h"
 #include "GameFramework/Actor.h"
 #include "Components/StaticMeshComponent.h"
 #include "Boid.generated.h"
@@ -23,7 +24,11 @@ public:
 	class UStaticMeshComponent* StaticMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Boid")
-	float NeighborRange = 500.0f; 
+	float NeighborRange = 500.0f;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Steering")
+	USteeringComponent* SteeringComponent;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

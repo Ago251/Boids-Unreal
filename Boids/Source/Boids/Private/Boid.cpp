@@ -2,6 +2,8 @@
 
 
 #include "Boid.h"
+
+#include "SteeringComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 
@@ -10,12 +12,14 @@ ABoid::ABoid()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
-	StaticMesh->SetupAttachment(RootComponent);
-
+	StaticMesh->SetupAttachment(RootComponent);  
+	
 	NeighborDetectionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("DetectionSphere"));
-	NeighborDetectionSphere->SetupAttachment(StaticMesh); 
+	NeighborDetectionSphere->SetupAttachment(StaticMesh);
+	
+	SteeringComponent = CreateDefaultSubobject<USteeringComponent>(TEXT("SteeringComponent"));
 }
 
 // Called when the game starts or when spawned
