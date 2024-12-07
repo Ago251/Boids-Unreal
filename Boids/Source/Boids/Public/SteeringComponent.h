@@ -17,13 +17,18 @@ public:
 	// Sets default values for this component's properties
 	USteeringComponent();
 
+	UPROPERTY(EditAnywhere, Instanced, BlueprintReadWrite, Category = "Steering")
+	TArray<USteeringBehaviour*> SteeringBehaviours;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Steering")
-	TArray<TSubclassOf<USteeringBehaviour>> SteeringBehaviours;
+	float Speed = 1000.0f;
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-
+	
+	FVector CalculateSteeringForce(AActor* Owner);
+	
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;

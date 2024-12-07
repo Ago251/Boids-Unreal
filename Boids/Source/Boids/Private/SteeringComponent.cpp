@@ -28,7 +28,34 @@ void USteeringComponent::BeginPlay()
 void USteeringComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	
+	AActor* Owner = GetOwner();
+	if (!Owner)
+		return;
+	
+	UStaticMeshComponent* StaticMesh = Owner->FindComponentByClass<UStaticMeshComponent>();
+	if (!StaticMesh)
+		return;
+	
+	FVector TotalSteeringForce = CalculateSteeringForce(Owner);
+	
+	FVector MovementDirection = TotalSteeringForce.GetClampedToMaxSize(1.0f);
+	FVector MovementOffset = MovementDirection * Speed * DeltaTime;
+	
+	FVector NewLocation = Owner->GetActorLocation() + MovementOffset;
+	Owner->SetActorLocation(NewLocation);
+}
 
-	// ...
+FVector USteeringComponent::CalculateSteeringForce(AActor* Owner)
+{
+	FVector TotalSteeringForce = FVector::ZeroVector;
+
+	for (USteeringBehaviour* BehaviourInstance : SteeringBehaviours)
+	{
+			if (BehaviourInstance)
+				TotalSteeringForce += BehaviourInstance->CalculateSteeringForce(Owner);
+	}
+
+	return TotalSteeringForce;
 }
 
