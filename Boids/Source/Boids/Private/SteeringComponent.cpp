@@ -44,6 +44,12 @@ void USteeringComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	
 	FVector NewLocation = Owner->GetActorLocation() + MovementOffset;
 	Owner->SetActorLocation(NewLocation);
+
+	if (!MovementDirection.IsNearlyZero())
+	{
+		FRotator NewRotation = MovementDirection.Rotation();
+		Owner->SetActorRotation(NewRotation);
+	}
 }
 
 FVector USteeringComponent::CalculateSteeringForce(AActor* Owner)
