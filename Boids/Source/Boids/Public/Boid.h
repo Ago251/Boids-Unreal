@@ -23,9 +23,6 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Boid")
 	class UStaticMeshComponent* StaticMesh;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Boid")
-	float NeighborRange = 500.0f;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Steering")
 	USteeringComponent* SteeringComponent;
 	
