@@ -15,8 +15,5 @@ class BOIDS_API USeparationBehaviour : public USteeringBehaviour
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Separation")
-	float SeparationStrength = 1.0f;
-	
 	virtual FVector CalculateSteeringForce_Implementation(class AActor* Owner) override;
 };

@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Boid.h"
 #include "CohesionBehaviour.h"
+#include "Boid.h"
 
 FVector UCohesionBehaviour::CalculateSteeringForce_Implementation(AActor* Owner)
 {
@@ -26,7 +26,7 @@ FVector UCohesionBehaviour::CalculateSteeringForce_Implementation(AActor* Owner)
 	{
 		CenterOfMass /= NeighborCount;
 		FVector DesiredDirection = (CenterOfMass - OwnerLocation).GetSafeNormal();
-		return DesiredDirection * CohesionStrength;
+		return DesiredDirection * Strength;
 	}
 
 	return FVector::ZeroVector;

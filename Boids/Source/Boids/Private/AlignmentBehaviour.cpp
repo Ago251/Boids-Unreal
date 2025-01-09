@@ -24,7 +24,7 @@ FVector UAlignmentBehaviour::CalculateSteeringForce_Implementation(AActor* Owner
 	{
 		AverageDirection /= NeighborCount;
 		FVector DesiredDirection = AverageDirection.GetSafeNormal();
-		return DesiredDirection * AlignmentStrength;
+		return DesiredDirection * Strength;
 	}
 
 	return FVector::ZeroVector;

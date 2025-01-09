@@ -23,7 +23,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Boid")
 	class UStaticMeshComponent* StaticMesh;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Steering")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Steering")
 	USteeringComponent* SteeringComponent;
 	
 protected:

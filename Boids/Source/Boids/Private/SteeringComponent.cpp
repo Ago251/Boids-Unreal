@@ -3,6 +3,10 @@
 
 #include "SteeringComponent.h"
 
+#include "AlignmentBehaviour.h"
+#include "CohesionBehaviour.h"
+#include "SeparationBehaviour.h"
+
 // Sets default values for this component's properties
 USteeringComponent::USteeringComponent()
 {
@@ -64,4 +68,40 @@ FVector USteeringComponent::CalculateSteeringForce(AActor* Owner)
 
 	return TotalSteeringForce;
 }
+
+void USteeringComponent::SetAlignmentWidget(USteeringControlWidget* Widget)
+{
+	for (USteeringBehaviour* behaviour : SteeringBehaviours)
+	{
+		if (behaviour && behaviour->IsA<UAlignmentBehaviour>())
+		{
+			behaviour->SetWidget(Widget); 
+		}
+	}
+}
+
+void USteeringComponent::SetCohesionWidget(USteeringControlWidget* Widget)
+{
+	for (USteeringBehaviour* behaviour : SteeringBehaviours)
+	{
+		if (behaviour && behaviour->IsA<UCohesionBehaviour>())
+		{
+			behaviour->SetWidget(Widget); 
+		}
+	}
+}
+
+void USteeringComponent::SetSeparationWidget(USteeringControlWidget* Widget)
+{
+	for (USteeringBehaviour* behaviour : SteeringBehaviours)
+	{
+		if (behaviour && behaviour->IsA<USeparationBehaviour>())
+		{
+			behaviour->SetWidget(Widget); 
+		}
+	}
+}
+
+
+
 

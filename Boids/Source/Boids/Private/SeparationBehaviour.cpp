@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Boid.h"
 #include "SeparationBehaviour.h"
+#include "Boid.h"
 
 
 FVector USeparationBehaviour::CalculateSteeringForce_Implementation(class AActor* Owner)
@@ -24,5 +24,5 @@ FVector USeparationBehaviour::CalculateSteeringForce_Implementation(class AActor
 	if (Neighbors.Num() > 0)
 		SteeringForce /= Neighbors.Num();
 
-	return SteeringForce * SeparationStrength;
+	return SteeringForce * Strength;
 }

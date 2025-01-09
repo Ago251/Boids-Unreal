@@ -15,8 +15,5 @@ class BOIDS_API UCohesionBehaviour : public USteeringBehaviour
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SteeringBehaviour")
-	float CohesionStrength = 1.0f;
-	
 	virtual FVector CalculateSteeringForce_Implementation(AActor* Owner) override;
 };

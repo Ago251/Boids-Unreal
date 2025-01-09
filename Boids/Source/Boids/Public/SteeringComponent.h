@@ -32,6 +32,10 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-		
+	UFUNCTION(BlueprintCallable)
+	void SetCohesionWidget(USteeringControlWidget* Widget);
+	UFUNCTION(BlueprintCallable)
+	void SetSeparationWidget(USteeringControlWidget* Widget);
+	UFUNCTION(BlueprintCallable)
+	void SetAlignmentWidget(USteeringControlWidget* Widget);
 };

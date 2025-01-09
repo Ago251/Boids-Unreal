@@ -15,8 +15,5 @@ class BOIDS_API UAlignmentBehaviour : public USteeringBehaviour
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Steering")
-	float AlignmentStrength = 1.0f;
-	
 	virtual FVector CalculateSteeringForce_Implementation(AActor* Owner) override;
 };
