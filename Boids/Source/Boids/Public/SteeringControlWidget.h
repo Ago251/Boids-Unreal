@@ -20,14 +20,12 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Steering")
 	FOnValueChanged OnValueChangedDelegate;
 	
-	// Riferimenti ai widget Slider e Text
 	UPROPERTY(meta = (BindWidget))
 	class USlider* StrengthSlider;
 
 	UPROPERTY(meta = (BindWidget))
 	class UTextBlock* StrengthText;
-
-	// Funzioni per gestire il cambiamento dei valori
+	
 	UFUNCTION(BlueprintCallable)
 	void OnStrengthValueChanged(float Value);
 
