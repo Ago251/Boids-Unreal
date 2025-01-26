@@ -25,9 +25,9 @@ FVector UWanderBehaviour::CalculateSteeringForce_Implementation(AActor* Owner)
 	
     FVector WanderForce = WanderTargetWorld - BoidLocation;
 	
-    DrawDebugSphere(GetWorld(), WanderCircleCenter, 10.f, 12, FColor::Blue, false, 0.1f);
-    DrawDebugSphere(GetWorld(), WanderTargetWorld, 10.f, 12, FColor::Red, false, 0.1f);
-    DrawDebugLine(GetWorld(), BoidLocation, WanderTargetWorld, FColor::Green, false, 0.1f, 0, 1.f);
+    DrawDebugSphere(GetWorld(), WanderCircleCenter, 10.f, 12, FColor::Blue, false, 0.0f);
+    DrawDebugSphere(GetWorld(), WanderTargetWorld, 10.f, 12, FColor::Red, false, 0.0f);
+    DrawDebugLine(GetWorld(), BoidLocation, WanderTargetWorld, FColor::Green, false, 0.0f, 0, 1.f);
 	
     return WanderForce.GetSafeNormal() * WanderCircleRadius;
 }
