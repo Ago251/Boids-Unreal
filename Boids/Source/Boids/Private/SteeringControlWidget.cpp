@@ -7,8 +7,7 @@
 void USteeringControlWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
-
-	// Associa l'evento di cambiamento del valore dello Slider alla funzione
+	
 	if (StrengthSlider)
 	{
 		StrengthSlider->OnValueChanged.AddDynamic(this, &USteeringControlWidget::OnStrengthValueChanged);
@@ -17,7 +16,6 @@ void USteeringControlWidget::NativeConstruct()
 
 void USteeringControlWidget::OnStrengthValueChanged(float Value)
 {
-	// Aggiorna il testo con il valore attuale dello Slider
 	OnValueChangedDelegate.Broadcast(Value);
 }
 

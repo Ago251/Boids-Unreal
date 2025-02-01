@@ -15,12 +15,10 @@ class BOIDS_API ABoidsHUD : public AHUD
 	GENERATED_BODY()
 
 public:
-	// Classe del widget
 	UPROPERTY(EditAnywhere, Category = "UI")
 	TSubclassOf<class UUserWidget> SteeringControlWidgetClass;
 
 private:
-	// Istanza del widget
 	UUserWidget* SteeringControlWidgetInstance;
 
 protected:

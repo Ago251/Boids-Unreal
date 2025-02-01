@@ -18,8 +18,8 @@ FVector UWanderBehaviour::CalculateSteeringForce_Implementation(AActor* Owner)
 	float ActorRadius = 0.f;
 	if (Owner) {
 		FVector Origin, BoxExtent;
-		Owner->GetActorBounds(true, Origin, BoxExtent); // Ottieni le dimensioni del bounding box dell'attore
-		ActorRadius = BoxExtent.Size() * 0.2f;          // Calcola il raggio approssimativo
+		Owner->GetActorBounds(true, Origin, BoxExtent);
+		ActorRadius = BoxExtent.Size() * 0.2f;        
 	}
 
 	FVector WanderCircleCenter = BoidLocation + Forward * (WanderCircleRadius + ActorRadius);
