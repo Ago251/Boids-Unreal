@@ -15,7 +15,15 @@ FVector UWanderBehaviour::CalculateSteeringForce_Implementation(AActor* Owner)
     FVector BoidLocation = Owner->GetActorLocation();
     FVector Forward = Owner->GetActorForwardVector();
 	
-    FVector WanderCircleCenter = BoidLocation + Forward * WanderCircleRadius;
+	float ActorRadius = 0.f;
+	if (Owner) {
+		FVector Origin, BoxExtent;
+		Owner->GetActorBounds(true, Origin, BoxExtent); // Ottieni le dimensioni del bounding box dell'attore
+		ActorRadius = BoxExtent.Size() * 0.2f;          // Calcola il raggio approssimativo
+	}
+
+	FVector WanderCircleCenter = BoidLocation + Forward * (WanderCircleRadius + ActorRadius);
+
 	
     WanderTarget += FVector(FMath::FRandRange(-WanderJitter, WanderJitter), FMath::FRandRange(-WanderJitter, WanderJitter), FMath::FRandRange(-WanderJitter, WanderJitter));
 	
@@ -29,5 +37,5 @@ FVector UWanderBehaviour::CalculateSteeringForce_Implementation(AActor* Owner)
     DrawDebugSphere(GetWorld(), WanderTargetWorld, 10.f, 12, FColor::Red, false, 0.0f);
     DrawDebugLine(GetWorld(), BoidLocation, WanderTargetWorld, FColor::Green, false, 0.0f, 0, 1.f);
 	
-    return WanderForce.GetSafeNormal() * WanderCircleRadius;
+    return (WanderForce.GetSafeNormal() * WanderCircleRadius) * Strength;
 }
