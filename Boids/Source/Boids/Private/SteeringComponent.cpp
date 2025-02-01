@@ -4,6 +4,7 @@
 #include "SteeringComponent.h"
 
 #include "AlignmentBehaviour.h"
+#include "Boid.h"
 #include "CohesionBehaviour.h"
 #include "SeparationBehaviour.h"
 
@@ -35,10 +36,6 @@ void USteeringComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	
 	AActor* Owner = GetOwner();
 	if (!Owner)
-		return;
-	
-	UStaticMeshComponent* StaticMesh = Owner->FindComponentByClass<UStaticMeshComponent>();
-	if (!StaticMesh)
 		return;
 	
 	FVector TotalSteeringForce = CalculateSteeringForce(Owner);
