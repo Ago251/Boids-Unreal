@@ -16,13 +16,19 @@ class BOIDS_API UObstacleAvoidanceBehaviour : public USteeringBehaviour
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Obstacle Avoidance")
-	int NumFeelers = 3;
+	int NumHorizontalFeelers = 3;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Obstacle Avoidance")
+	int NumVerticalFeelers = 3;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Obstacle Avoidance")
 	float FeelerLength = 500.f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Obstacle Avoidance")
-	float MaxAngle = 30.f;
+	float HorizontalMaxAngle = 30.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Obstacle Avoidance")
+	float VerticalMaxAngle = 30.0f;
 	
 public:
 	virtual FVector CalculateSteeringForce_Implementation(AActor* Owner) override;
