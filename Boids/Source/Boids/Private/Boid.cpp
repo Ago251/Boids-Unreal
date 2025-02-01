@@ -14,8 +14,8 @@ ABoid::ABoid()
 	PrimaryActorTick.bCanEverTick = true;
 	
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
-	StaticMesh->SetupAttachment(RootComponent);  
-	
+	SetRootComponent(StaticMesh);
+    	
 	NeighborDetectionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("DetectionSphere"));
 	NeighborDetectionSphere->SetupAttachment(StaticMesh);
 	
