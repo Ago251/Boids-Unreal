@@ -6,27 +6,28 @@
 FVector UObstacleAvoidanceBehaviour::CalculateSteeringForce_Implementation(AActor* Owner)
 {
     if (!Owner)
-    {
         return FVector::ZeroVector;
-    }
 
     FVector BoidLocation = Owner->GetActorLocation();
     FVector Forward = Owner->GetActorForwardVector();
-
-    FVector BestAvoidanceForce = FVector::ZeroVector;
-    float BestDistance = 0.f;
     
-    int TotalFeelers = NumHorizontalFeelers * NumVerticalFeelers;
+    FVector TotalAvoidanceForce = FVector::ZeroVector;
 
     for (int VerticalIndex = 0; VerticalIndex < NumVerticalFeelers; VerticalIndex++)
     {
-        float VerticalAngle = FMath::Lerp(-VerticalMaxAngle, VerticalMaxAngle, (float)VerticalIndex / (NumVerticalFeelers - 1));
-        FVector VerticalDirection = Forward.RotateAngleAxis(VerticalAngle, FVector::RightVector);
+        float VerticalStep = (NumVerticalFeelers > 1) ? (float)VerticalIndex / (NumVerticalFeelers - 1) : 0.5f;
+        float VerticalAngle = FMath::Lerp(-VerticalMaxAngle, VerticalMaxAngle, VerticalStep);
+        
+        FQuat VerticalRotation = FQuat(Owner->GetActorRightVector(), FMath::DegreesToRadians(VerticalAngle));
+        FVector RotatedForward = VerticalRotation.RotateVector(Forward);
 
         for (int HorizontalIndex = 0; HorizontalIndex < NumHorizontalFeelers; HorizontalIndex++)
         {
-            float HorizontalAngle = FMath::Lerp(-HorizontalMaxAngle, HorizontalMaxAngle, (float)HorizontalIndex / (NumHorizontalFeelers - 1));
-            FVector Direction = VerticalDirection.RotateAngleAxis(HorizontalAngle, FVector::UpVector);
+            float HorizontalStep = (NumHorizontalFeelers > 1) ? (float)HorizontalIndex / (NumHorizontalFeelers - 1) : 0.5f;
+            float HorizontalAngle = FMath::Lerp(-HorizontalMaxAngle, HorizontalMaxAngle, HorizontalStep);
+            
+            FQuat HorizontalRotation = FQuat(Owner->GetActorUpVector(), FMath::DegreesToRadians(HorizontalAngle));
+            FVector Direction = HorizontalRotation.RotateVector(RotatedForward);
 
             FVector TraceStart = BoidLocation;
             FVector TraceEnd = BoidLocation + Direction * FeelerLength;
@@ -43,22 +44,16 @@ FVector UObstacleAvoidanceBehaviour::CalculateSteeringForce_Implementation(AActo
                 QueryParams
             );
 
-            FColor DebugColor = bHit ? FColor::Red : FColor::Green;
-            DrawDebugLine(GetWorld(), TraceStart, TraceEnd, DebugColor, false, 0.0f);
-
             if (bHit)
             {
                 FVector AvoidanceForce = (HitResult.Normal + Forward).GetSafeNormal();
                 float DistanceToObstacle = FVector::Dist(HitResult.Location, BoidLocation);
-
-                if (DistanceToObstacle > BestDistance)
-                {
-                    BestDistance = DistanceToObstacle;
-                    BestAvoidanceForce = AvoidanceForce;
-                }
+                float Weight = 1.0f - (DistanceToObstacle / FeelerLength);
+                TotalAvoidanceForce += AvoidanceForce * Weight;
             }
         }
     }
 
-    return (BestAvoidanceForce * FeelerLength) * Strength;
+    return (TotalAvoidanceForce * FeelerLength) * Strength;
 }
+

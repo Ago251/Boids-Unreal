@@ -28,7 +28,5 @@ private:
 	FVector WanderTarget;
 
 public:
-	UWanderBehaviour();
-	
 	virtual FVector CalculateSteeringForce_Implementation(AActor* Owner) override;
 };
