@@ -38,17 +38,16 @@ void USteeringComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	if (!Owner)
 		return;
 	
-	FVector TotalSteeringForce = CalculateSteeringForce(Owner);
+	FVector Force = CalculateSteeringForce(Owner);
+	Velocity += (Force * DeltaTime).GetClampedToMaxSize(MaxSpeed);;
+	Velocity = Velocity.GetClampedToMaxSize(MaxSpeed);
 	
-	FVector MovementDirection = TotalSteeringForce.GetClampedToMaxSize(1.0f);
-	FVector MovementOffset = MovementDirection * Speed * DeltaTime;
-	
-	FVector NewLocation = Owner->GetActorLocation() + MovementOffset;
+	FVector NewLocation = Owner->GetActorLocation() + Velocity;
 	Owner->SetActorLocation(NewLocation);
 
-	if (!MovementDirection.IsNearlyZero())
+	if (!Velocity.IsNearlyZero())
 	{
-		FRotator NewRotation = MovementDirection.Rotation();
+		FRotator NewRotation = FMath::RInterpTo(Owner->GetActorRotation(), Velocity.Rotation(), GetWorld()->DeltaTimeSeconds, 7.0f);
 		Owner->SetActorRotation(NewRotation);
 	}
 }

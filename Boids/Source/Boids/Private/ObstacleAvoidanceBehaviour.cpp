@@ -35,7 +35,7 @@ FVector UObstacleAvoidanceBehaviour::CalculateSteeringForce_Implementation(AActo
             FHitResult HitResult;
             FCollisionQueryParams QueryParams;
             QueryParams.AddIgnoredActor(Owner);
-
+            
             bool bHit = GetWorld()->LineTraceSingleByChannel(
                 HitResult,
                 TraceStart,
@@ -44,16 +44,17 @@ FVector UObstacleAvoidanceBehaviour::CalculateSteeringForce_Implementation(AActo
                 QueryParams
             );
 
+            FColor DebugColor = bHit ? FColor::Red : FColor::Green;
+            DrawDebugLine(GetWorld(), TraceStart, TraceEnd, DebugColor, false, 0.0f);
+            
             if (bHit)
             {
                 FVector AvoidanceForce = (HitResult.Normal + Forward).GetSafeNormal();
-                float DistanceToObstacle = FVector::Dist(HitResult.Location, BoidLocation);
-                float Weight = 1.0f - (DistanceToObstacle / FeelerLength);
-                TotalAvoidanceForce += AvoidanceForce * Weight;
+                TotalAvoidanceForce += AvoidanceForce;
             }
         }
     }
 
-    return (TotalAvoidanceForce * FeelerLength) * Strength;
+    return TotalAvoidanceForce.GetSafeNormal() * Strength;
 }
 

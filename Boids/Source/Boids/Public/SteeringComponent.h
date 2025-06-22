@@ -21,9 +21,11 @@ public:
 	TArray<USteeringBehaviour*> SteeringBehaviours;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Steering")
-	float Speed = 1000.0f;
+	float MaxSpeed = 10.0f;
 
 protected:
+	FVector Velocity;
+	
 	// Called when the game starts
 	virtual void BeginPlay() override;
 	

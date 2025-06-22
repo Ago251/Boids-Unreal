@@ -16,12 +16,13 @@ FVector USeparationBehaviour::CalculateSteeringForce_Implementation(class AActor
 	for (ABoid* Neighbor : Neighbors)
 	{
 		float Distance = FVector::Dist(Boid->GetActorLocation(), Neighbor->GetActorLocation());
-		FVector Diff = Boid->GetActorLocation() - Neighbor->GetActorLocation();
-		SteeringForce += Diff / Distance;
+		FVector Direction = Boid->GetActorLocation() - Neighbor->GetActorLocation();
+		SteeringForce += Direction / Distance;
 	}
 
 	if (Neighbors.Num() > 0)
 		SteeringForce /= Neighbors.Num();
 
-	return SteeringForce * Strength;
+
+	return SteeringForce.GetSafeNormal() * Strength;
 }
