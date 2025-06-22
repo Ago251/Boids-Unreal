@@ -39,7 +39,7 @@ void USteeringComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 		return;
 	
 	FVector Force = CalculateSteeringForce(Owner);
-	Velocity += (Force * DeltaTime).GetClampedToMaxSize(MaxSpeed);;
+	Velocity += Force * DeltaTime;
 	Velocity = Velocity.GetClampedToMaxSize(MaxSpeed);
 	
 	FVector NewLocation = Owner->GetActorLocation() + Velocity;
